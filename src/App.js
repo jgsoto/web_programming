@@ -1,29 +1,26 @@
 import "./styles.css";
 import { useState } from "react";
+import Home from "./Home";
+import AppOne from "./SumApp";
+import Calculator from "./Calculator";
+import SearchPage from "./SearchPage";
+import DetailPage from "./Details";
 
 export default function App() {
-  const [number1, setNumber1] = useState(0);
-  const [number2, setNumber2] = useState(0);
-  const handleClick = () => {
-    const sum = Number(number1) + Number(number2);
-    return alert("the result is: " + sum);
-  };
+  const [screen, setScreen] = useState("home");
+  const [selected, setSelected] = useState(null);
+
   return (
-    <div className="App">
-      <h1>number 1</h1>
-      <input
-        type="number"
-        value={number1}
-        onChange={(e) => setNumber1(e.target.value)}
-      ></input>
-      <h1>number 2</h1>
-      <input
-        type="number"
-        value={number2}
-        onChange={(e) => setNumber2(e.target.value)}
-      ></input>
-      <p />
-      <button onClick={handleClick}>Result</button>
+    <div className="p-5 text-center bg-gray-100 min-h-screen">
+      {screen === "home" && <Home setScreen={setScreen} />}
+      {screen === "one" && <AppOne setScreen={setScreen} />}
+      {screen === "two" && <Calculator setScreen={setScreen} />}
+      {screen === "three" && (
+        <SearchPage setScreen={setScreen} setSelected={setSelected} />
+      )}
+      {screen === "detail" && (
+        <DetailPage item={selected} setScreen={setScreen} />
+      )}
     </div>
   );
 }
