@@ -11,7 +11,7 @@ export default function App() {
   const [selected, setSelected] = useState(null);
 
   return (
-    <div>
+    <div className="p-5 text-center bg-gray-100 min-h-screen">
       {screen === "home" && <Home setScreen={setScreen} />}
       {screen === "one" && <AppOne setScreen={setScreen} />}
       {screen === "two" && <Calculator setScreen={setScreen} />}

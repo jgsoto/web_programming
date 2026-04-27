@@ -14,19 +14,36 @@ export default function SearchPage({ setScreen, setSelected }) {
   };
 
   return (
-    <>
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder="Search....."
-      ></input>
-      <button onClick={search}>Search</button>
-      <button onClick={() => setScreen("home")}>Back</button>
-      <div className="results">
+    <div className="p-4">
+      <div className="flex flex-col items-center gap-3 mb-4">
+        <input
+          className="p-2 border rounded w-60 max-w-full"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search..."
+        />
+
+        <div className="flex gap-2">
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={search}
+          >
+            Search
+          </button>
+
+          <button
+            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={() => setScreen("home")}
+          >
+            Back
+          </button>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {results.map((r, i) => (
           <Card
             key={i}
-            className="card"
             data={r.show}
             onClick={() => {
               setSelected(r.show);
@@ -35,6 +52,6 @@ export default function SearchPage({ setScreen, setSelected }) {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
