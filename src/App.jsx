@@ -1,26 +1,49 @@
-import "./App.css";
 import { useState } from "react";
-import Home from "./Home";
-import AppOne from "./SumApp";
-import Calculator from "./Calculator";
-import SearchPage from "./SearchPage";
-import DetailPage from "./Details";
+import Home from "./pages/Home";
+import SumApp from "./pages/SumApp";
+import Calculator from "./pages/Calculator";
+import SearchPage from "./pages/SearchPage";
+import DetailPage from "./pages/DetailPage";
 
 export default function App() {
   const [screen, setScreen] = useState("home");
   const [selected, setSelected] = useState(null);
 
+  const renderScreen = () => {
+    switch (screen) {
+      case "home":
+        return <Home setScreen={setScreen} />;
+
+      case "one":
+        return <SumApp setScreen={setScreen} />;
+
+      case "two":
+        return <Calculator setScreen={setScreen} />;
+
+      case "three":
+        return (
+          <SearchPage
+            setScreen={setScreen}
+            setSelected={setSelected}
+          />
+        );
+
+      case "detail":
+        return (
+          <DetailPage
+            item={selected}
+            setScreen={setScreen}
+          />
+        );
+
+      default:
+        return <Home setScreen={setScreen} />;
+    }
+  };
+
   return (
-    <div className="p-5 text-center bg-gray-100 min-h-screen">
-      {screen === "home" && <Home setScreen={setScreen} />}
-      {screen === "one" && <AppOne setScreen={setScreen} />}
-      {screen === "two" && <Calculator setScreen={setScreen} />}
-      {screen === "three" && (
-        <SearchPage setScreen={setScreen} setSelected={setSelected} />
-      )}
-      {screen === "detail" && (
-        <DetailPage item={selected} setScreen={setScreen} />
-      )}
+    <div className="min-h-screen bg-gray-100">
+      {renderScreen()}
     </div>
   );
 }
