@@ -1,6 +1,12 @@
 import Button from "../atoms/Button";
+import type {Show} from "../../types/Show";
 
-export default function DetailCard({ item, onBack }) {
+type DetailCardProps = {
+  item: Show;
+  onBack: () => void;
+};
+
+export default function DetailCard({ item, onBack }: DetailCardProps) {
   const cleanSummary = item.summary
     ? item.summary.replace(/<[^>]+>/g, "")
     : "No description";

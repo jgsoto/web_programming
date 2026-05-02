@@ -1,9 +1,14 @@
 import { useState } from "react";
 import SumForm from "../components/organisms/SumForm";
+import type { Screen } from "../types/Screen";  
 
-export default function SumApp({ setScreen }) {
-  const [number1, setNumber1] = useState("");
-  const [number2, setNumber2] = useState("");
+type SumAppProps = {
+  setScreen: (screen: Screen) => void;
+};
+
+export default function SumApp({ setScreen }: SumAppProps) {
+  const [number1, setNumber1] = useState<string>("");
+  const [number2, setNumber2] = useState<string>("");
 
   const handleClick = () => {
     const sum = Number(number1) + Number(number2);

@@ -1,6 +1,12 @@
 import Button from "../atoms/Button";
+import type {Show} from "../../types/Show";
 
-export default function Card({ data, onClick }) {
+type CardProps = {
+  data: Show;
+  onClick: () => void;
+};
+
+export default function Card({ data, onClick }: CardProps) {
   const cleanSummary = data.summary
     ? data.summary.replace(/<[^>]+>/g, "").slice(0, 120)
     : "No description";

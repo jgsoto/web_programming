@@ -2,16 +2,21 @@ import { useState } from "react";
 import CalculatorDisplay from "../components/molecules/CalculatorDisplay";
 import CalculatorGrid from "../components/organisms/CalculatorGrid";
 import Button from "../components/atoms/Button";
+import type { Screen } from "../types/Screen";
 
-export default function Calculator({ setScreen }) {
-  const [display, setDisplay] = useState("");
+type CalculatorProps = {
+  setScreen: (screen: Screen) => void;
+};
 
-  const agregate = (value) => {
-    setDisplay(display + value);
+export default function Calculator({ setScreen }: CalculatorProps) {
+  const [display, setDisplay] = useState<string>("");
+
+  const agregate = (value: string) => {
+    setDisplay((prev) => prev + value);
   };
 
   const erase = () => {
-    setDisplay(display.slice(0, -1));
+    setDisplay((prev) => prev.slice(0, -1));
   };
 
   const reset = () => {
@@ -27,10 +32,10 @@ export default function Calculator({ setScreen }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4 max-w-sm">
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
       <h2 className="text-2xl font-bold mb-4">Calculator</h2>
 
-      <div className="max-w-xs">
+      <div className="w-full max-w-xs">
         <CalculatorDisplay value={display} />
 
         <CalculatorGrid
