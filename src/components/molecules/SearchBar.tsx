@@ -1,12 +1,19 @@
 import Input from "../atoms/Input";
 import Button from "../atoms/Button";
 
+type SearchBarProps = {
+  query: string;
+  setQuery: (value: string) => void;
+  onSearch: () => void;
+  onBack: () => void;
+};
+
 export default function SearchBar({
   query,
   setQuery,
   onSearch,
   onBack,
-}) {
+}: SearchBarProps) {
   return (
     <div className="w-full flex flex-col sm:flex-row gap-3 mb-6">
       <Input

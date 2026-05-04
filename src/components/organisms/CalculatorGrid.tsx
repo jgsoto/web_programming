@@ -1,12 +1,26 @@
 import Button from "../atoms/Button";
 
+type CalculatorGridProps = {
+  agregate: (value: string) => void;
+  erase: () => void;
+  reset: () => void;
+  calculate: () => void;
+};
+
+type ButtonConfig = {
+  text: string;
+  action: () => void;
+  color?: "gray" | "orange" | "red" | "green" | "blue";
+  span?: string;
+};
+
 export default function CalculatorGrid({
   agregate,
   erase,
   reset,
   calculate,
-}) {
-  const buttons = [
+}: CalculatorGridProps) {
+  const buttons: ButtonConfig[] = [
     { text: "Er", action: erase, color: "red" },
     { text: "/", action: () => agregate("/"), color: "orange" },
     { text: "*", action: () => agregate("*"), color: "orange" },

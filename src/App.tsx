@@ -4,10 +4,12 @@ import SumApp from "./pages/SumApp";
 import Calculator from "./pages/Calculator";
 import SearchPage from "./pages/SearchPage";
 import DetailPage from "./pages/DetailPage";
+import type { Show } from "./types/Show";
+import type { Screen } from "./types/Screen";
 
 export default function App() {
-  const [screen, setScreen] = useState("home");
-  const [selected, setSelected] = useState(null);
+  const [screen, setScreen] = useState<Screen>("home");
+  const [selected, setSelected] = useState<Show | null>(null);
 
   const renderScreen = () => {
     switch (screen) {

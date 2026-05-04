@@ -1,20 +1,21 @@
-import { useState } from "react";
 import SearchBar from "../components/molecules/SearchBar";
 import CardList from "../components/organisms/CardList";
+import { useShows } from "../hooks/useShows";
+import type { Show } from "../types/Show";
+import type { Screen } from "../types/Screen";
 
-export default function SearchPage({ setScreen, setSelected }) {
-  const [query, setQuery] = useState("");
-  const [results, setResults] = useState([]);
+type SearchPageProps = {
+  setScreen: (screen: Screen) => void;
+  setSelected: (item: Show) => void;
+};
 
-  const search = async () => {
-    const response = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${query}`
-    );
-    const data = await response.json();
-    setResults(data);
-  };
+export default function SearchPage({
+  setScreen,
+  setSelected,
+}: SearchPageProps) {
+  const { query, setQuery, results, search, loading } = useShows();
 
-  const handleSelect = (item) => {
+  const handleSelect = (item: Show) => {
     setSelected(item);
     setScreen("detail");
   };
@@ -29,6 +30,8 @@ export default function SearchPage({ setScreen, setSelected }) {
           onSearch={search}
           onBack={() => setScreen("home")}
         />
+
+        {loading && <p className="text-center">Loading...</p>}
 
         <CardList
           results={results}

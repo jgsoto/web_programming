@@ -1,7 +1,21 @@
-export default function Button({ text, onClick, color = "gray", span = "" }) {
+type ButtonColor = "gray" | "orange" | "red" | "green" | "blue";
+
+type ButtonProps = {
+  text: string;
+  onClick: () => void;
+  color?: ButtonColor;
+  span?: string;
+};
+
+export default function Button({
+  text,
+  onClick,
+  color = "gray",
+  span = "",
+}: ButtonProps) {
   const base = "p-3 rounded";
 
-  const styles = {
+  const styles: Record<ButtonColor, string> = {
     gray: "bg-gray-200 hover:bg-gray-300",
     orange: "bg-orange-400 hover:bg-orange-500 text-white",
     red: "bg-red-500 hover:bg-red-600 text-white",

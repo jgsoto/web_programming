@@ -1,6 +1,10 @@
 import Input from "../atoms/Input";
 
-export default function CalculatorDisplay({ value }) {
+type CalculatorDisplayProps = {
+  value: string;
+};
+
+export default function CalculatorDisplay({ value }: CalculatorDisplayProps) {
   return (
     <Input
       type="text"
