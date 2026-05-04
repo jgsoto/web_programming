@@ -1,7 +1,7 @@
-import { useState } from "react";
 import SearchBar from "../components/molecules/SearchBar";
 import CardList from "../components/organisms/CardList";
-import type { Show, ApiResult } from "../types/Show";
+import { useShows } from "../hooks/useShows";
+import type { Show } from "../types/Show";
 import type { Screen } from "../types/Screen";
 
 type SearchPageProps = {
@@ -13,16 +13,7 @@ export default function SearchPage({
   setScreen,
   setSelected,
 }: SearchPageProps) {
-  const [query, setQuery] = useState<string>("");
-  const [results, setResults] = useState<ApiResult[]>([]);
-
-  const search = async () => {
-    const response = await fetch(
-      `https://api.tvmaze.com/search/shows?q=${query}`
-    );
-    const data: ApiResult[] = await response.json();
-    setResults(data);
-  };
+  const { query, setQuery, results, search, loading } = useShows();
 
   const handleSelect = (item: Show) => {
     setSelected(item);
@@ -39,6 +30,8 @@ export default function SearchPage({
           onSearch={search}
           onBack={() => setScreen("home")}
         />
+
+        {loading && <p className="text-center">Loading...</p>}
 
         <CardList
           results={results}
