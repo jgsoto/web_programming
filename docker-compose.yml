@@ -1,0 +1,8 @@
+
+services:
+  react-app:
+    image: jgsoto1507/ec2-test:latest
+    container_name: react-app
+    ports:
+      - "80:80"
+    restart: unless-stopped
